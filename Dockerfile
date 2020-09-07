@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 # 设置pip源为国内源
 COPY pip.conf /root/.pip/pip.conf
 
-# 在容器内/var/www/html/下创建 mysite1文件夹
+# 在容器内/var/www/html/下创建 mysite3文件夹
 RUN mkdir -p /var/www/html/mysite3
 
 # 设置容器内工作目录
