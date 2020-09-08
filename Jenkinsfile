@@ -40,9 +40,9 @@ node ("node133") {
 			echo "docker exec -it mysite3 /bin/bash start.sh" >> /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST1/"$CONTAINER_EXIST11"/g' /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST2/"$CONTAINER_EXIST12"/g' /tmp/start.sh
-			todo scp /tmp/start.sh root@jenkins_node.example.com:/tmp/start.sh
-			todo ssh root@jenkins_node.example.com "chmod +x /tmp/start.sh"
-            todo ssh root@jenkins_node.example.com "/tmp/start.sh"
+			scp /tmp/start.sh kangvai@172.16.91.122:/tmp/start.sh
+			ssh kangvai@172.16.91.122 "chmod +x /tmp/start.sh"
+            ssh kangvai@172.16.91.122 "/tmp/start.sh"
 		'''
 	}
 }
