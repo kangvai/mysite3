@@ -26,8 +26,8 @@ node ("gtst_tushu122") {
 			echo "sudo docker exec -it mysite3 /bin/bash start.sh" >> /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST1/"$CONTAINER_EXIST11"/g' /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST2/"$CONTAINER_EXIST12"/g' /tmp/start.sh
-			"sudo chmod +x /tmp/start.sh"
-            		"/tmp/start.sh"
+			sudo chmod +x /tmp/start.sh
+            		/tmp/start.sh
 		'''
 	}
 }
