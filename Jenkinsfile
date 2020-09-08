@@ -7,8 +7,8 @@ node {
 	stage("Build") {
 		echo "开始构建docker镜像"
 		bat '''
-			docker build -f Dockerfile . -t django_mysite3:$BUILD_NUMBER
-			docker build -f compose/nginx/Dockerfile . -t mynginx:$BUILD_NUMBER
+			docker build -f Dockerfile . -t django_mysite3:v1
+			docker build -f compose/nginx/Dockerfile . -t mynginx:v1
 		'''
 	}
 	
@@ -16,10 +16,10 @@ node {
 		echo "上传docker镜像到制品仓库"
 		bat '''
 			docker login -u kangvai -p kv@2016014351
-			docker tag django_mysite3:$BUILD_NUMBER kangvai/django_mysite3:$BUILD_NUMBER
-			docker tag mynginx:$BUILD_NUMBER kangvai/mynginx:$BUILD_NUMBER
-			docker push kangvai/django_mysite3:$BUILD_NUMBER
-			docker push kangvai/mynginx:$BUILD_NUMBER
+			docker tag django_mysite3:v1 kangvai/django_mysite3:v1
+			docker tag mynginx:v1 kangvai/mynginx:v1
+			docker push kangvai/django_mysite3:v1
+			docker push kangvai/mynginx:v1
 		'''
 	}
 	
@@ -27,16 +27,16 @@ node {
 		echo "开始部署dev环境"
 		bat '''
 			echo "docker login -u kangvai -p kv@2016014351" > /tmp/start.sh
-			echo "docker pull kangvai/django_mysite3:$BUILD_NUMBER" >> /tmp/start.sh
-			echo "docker pull kangvai/mynginx:$BUILD_NUMBER" >> /tmp/start.sh
+			echo "docker pull kangvai/django_mysite3:v1" >> /tmp/start.sh
+			echo "docker pull kangvai/mynginx:v1" >> /tmp/start.sh
 			echo 'CONTAINER_EXIST11=`docker container ls -a|grep mysite3 | cut -d " " -f1`' >> /tmp/start.sh
 			echo 'CONTAINER_EXIST12=`docker container ls -a|grep mysite3-nginx | cut -d " " -f1`' >> /tmp/start.sh
 			echo '[ -n CONTAINER_EXIST1 ] && docker container stop mysite3' >> /tmp/start.sh
 			echo '[ -n CONTAINER_EXIST2 ] && docker container stop mysite3-nginx' >> /tmp/start.sh
             echo '[ -n CONTAINER_EXIST1 ] && docker container rm mysite3' >> /tmp/start.sh
 			echo '[ -n CONTAINER_EXIST2 ] && docker container rm mysite3-nginx' >> /tmp/start.sh
-			echo "docker container run -it --name mysite3 -p 8000:8000 -v /home/enka/mysite3:/var/www/html/mysite3 -d kangvai/django_mysite3:$BUILD_NUMBER" >> /tmp/start.sh
-			echo "docker container run -it --name mysite3-nginx -p 80:80 -v /home/enka/mysite3/static:/usr/share/nginx/html/static -v /home/enka/mysite3/media:/usr/share/nginx/html/media -v /home/enka/mysite3/compose/nginx/log:/var/log/nginx -d kangvai/mynginx:$BUILD_NUMBER" >> /tmp/start.sh
+			echo "docker container run -it --name mysite3 -p 8000:8000 -v /home/enka/mysite3:/var/www/html/mysite3 -d kangvai/django_mysite3:v1" >> /tmp/start.sh
+			echo "docker container run -it --name mysite3-nginx -p 80:80 -v /home/enka/mysite3/static:/usr/share/nginx/html/static -v /home/enka/mysite3/media:/usr/share/nginx/html/media -v /home/enka/mysite3/compose/nginx/log:/var/log/nginx -d kangvai/mynginx:v1" >> /tmp/start.sh
 			echo "docker exec -it mysite3 /bin/bash start.sh" >> /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST1/"$CONTAINER_EXIST11"/g' /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST2/"$CONTAINER_EXIST12"/g' /tmp/start.sh
