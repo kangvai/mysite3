@@ -41,8 +41,8 @@ node ("node133") {
 			sed -i 's/CONTAINER_EXIST1/"$CONTAINER_EXIST11"/g' /tmp/start.sh
 			sed -i 's/CONTAINER_EXIST2/"$CONTAINER_EXIST12"/g' /tmp/start.sh
 			scp /tmp/start.sh kangvai@172.16.91.122:/tmp/start.sh
-			ssh kangvai@172.16.91.122 "chmod +x /tmp/start.sh"
-            ssh kangvai@172.16.91.122 "/tmp/start.sh"
+			ssh chenwei@172.16.91.122 "chmod +x /tmp/start.sh"
+            ssh chenwei@172.16.91.122 "/tmp/start.sh"
 		'''
 	}
 }
