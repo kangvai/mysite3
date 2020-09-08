@@ -1,4 +1,4 @@
-node ("node133") {
+node {
 	echo "开始拉取代码"
 	stage("Checkout") {
 		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'b888ba74-a43b-4133-9ae8-d0d737d04655', url: 'git@github.com:kangvai/mysite3.git']]])
