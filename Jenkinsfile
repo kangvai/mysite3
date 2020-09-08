@@ -1,7 +1,7 @@
 node ("gtst_tushu122") {
 	echo "开始拉取代码"
 	stage("Checkout") {
-		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '4ae45ed8-b2d2-43db-8a3f-51c8470cb64a', url: 'git@github.com:kangvai/mysite3.git']]])
+		checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '093e6cdb-fb3a-4631-99b8-7d7bafcf5dad', url: 'https://github.com/kangvai/mysite3.git']]])
 	}
 	
 	stage("Build") {
