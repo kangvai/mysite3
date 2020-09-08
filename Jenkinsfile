@@ -6,7 +6,7 @@ node {
 	
 	stage("Build") {
 		echo "开始构建docker镜像"
-		sh '''
+		bat '''
 			docker build -f Dockerfile . -t django_mysite3:$BUILD_NUMBER
 			docker build -f compose/nginx/Dockerfile . -t mynginx:$BUILD_NUMBER
 		'''
@@ -14,7 +14,7 @@ node {
 	
 	stage("Upload") {
 		echo "上传docker镜像到制品仓库"
-		sh '''
+		bat '''
 			docker login -u kangvai -p kv@2016014351
 			docker tag django_mysite3:$BUILD_NUMBER kangvai/django_mysite3:$BUILD_NUMBER
 			docker tag mynginx:$BUILD_NUMBER kangvai/mynginx:$BUILD_NUMBER
@@ -25,7 +25,7 @@ node {
 	
 	stage("Deploy") {
 		echo "开始部署dev环境"
-		sh '''
+		bat '''
 			echo "docker login -u kangvai -p kv@2016014351" > /tmp/start.sh
 			echo "docker pull kangvai/django_mysite3:$BUILD_NUMBER" >> /tmp/start.sh
 			echo "docker pull kangvai/mynginx:$BUILD_NUMBER" >> /tmp/start.sh
