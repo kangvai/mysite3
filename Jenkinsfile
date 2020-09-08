@@ -17,7 +17,7 @@ node ("gtst_tushu122") {
 		sh '''
 			sudo docker run -it --name mysite3 -p 8000:8000 -v /home/enka/mysite3:/var/www/html/mysite3 -d django_mysite3:v1
 			sudo docker run -it --name mysite3-nginx -p 80:80 -v /home/enka/mysite3/static:/usr/share/nginx/html/static -v /home/enka/mysite3/media:/usr/share/nginx/html/media -v /home/enka/mysite3/compose/nginx/log:/var/log/nginx -d mynginx:v1
-			sudo docker exec -it mysite3 /bin/bash start.sh
+			sudo docker exec -i mysite3 /bin/bash start.sh
 		'''
 	}
 }
